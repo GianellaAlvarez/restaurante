@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservas — El Fogón de Teresa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-bodega">
+  <header class="editorial-header" id="header">
+    <div class="container header-stack">
+      <div class="header-top-bar">
+        <span class="header-meta">Mar – Dom · 13:00 a 23:30</span>
+        <a href="index.html" class="brand-title">El Fogón de Teresa</a>
+        <a href="reservas.html" class="header-cta-link">Reservar mesa →</a>
+        <button class="burger-btn" aria-label="Abrir menú" aria-expanded="false">Menú</button>
+      </div>
+
+      <nav class="editorial-nav" id="main-nav">
+        <a href="index.html">Portada</a>
+        <span class="nav-dot">•</span>
+        <a href="carta.html">La Carta Ilustrada</a>
+        <span class="nav-dot">•</span>
+        <a href="bodega-casa.html">La Casa y El Huerto</a>
+        <span class="nav-dot">•</span>
+        <a href="reservas.html" class="active">Reservas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="subpage-banner wine-banner">
+      <div class="container fade-up">
+        <p class="kicker">Tu mesa en la casa</p>
+        <h1>Reservas</h1>
+        <p>Elige rincón, hora y comensales para preparar vuestra mesa sin esperas.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container reserve-split">
+        <!-- Columna izquierda: Formulario con selector de ambiente y hora -->
+        <form class="booking-form fade-up" id="booking-form" novalidate>
+          <div class="zone-picker">
+            <span class="slot-label">Elige un ambiente *</span>
+            <div class="zone-grid" id="zone-grid">
+              <button type="button" class="zone-btn active" data-zone="Comedor principal">Comedor principal</button>
+              <button type="button" class="zone-btn" data-zone="Junto a la ventana">Junto a la ventana</button>
+              <button type="button" class="zone-btn" data-zone="Patio interior">Patio interior</button>
+            </div>
+            <input type="hidden" id="b-zone" value="Comedor principal" />
+          </div>
+
+          <div class="form-grid-2">
+            <label>
+              Nombre y apellidos *
+              <input type="text" id="b-name" placeholder="Ej. Elena Navarro" required />
+            </label>
+
+            <label>
+              Teléfono de contacto *
+              <input type="tel" id="b-phone" placeholder="Ej. 612 345 678" required />
+            </label>
+          </div>
+
+          <div class="form-grid-2">
+            <label>
+              Día de la reserva *
+              <input type="date" id="b-date" required />
+            </label>
+
+            <label>
+              Comensales *
+              <select id="b-guests">
+                <option value="2 personas">2 personas</option>
+                <option value="3 personas">3 personas</option>
+                <option value="4 personas">4 personas</option>
+                <option value="5 personas">5 personas</option>
+                <option value="6 personas">6 personas</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="slot-picker">
+            <span class="slot-label">Selecciona una hora disponible *</span>
+            <div class="slots-grid" id="slots-grid">
+              <button type="button" class="slot-btn" data-time="13:30">13:30</button>
+              <button type="button" class="slot-btn active" data-time="14:15">14:15</button>
+              <button type="button" class="slot-btn" data-time="15:00">15:00</button>
+              <button type="button" class="slot-btn" data-time="20:45">20:45</button>
+              <button type="button" class="slot-btn" data-time="21:30">21:30</button>
+              <button type="button" class="slot-btn" data-time="22:15">22:15</button>
+            </div>
+            <input type="hidden" id="b-time" value="14:15" />
+          </div>
+
+          <label>
+            Alergias o peticiones especiales
+            <textarea id="b-notes" rows="3" placeholder="Ej. Mesa tranquila, sin gluten..."></textarea>
+          </label>
+
+          <button type="submit" class="btn-wine full-btn">Confirmar reserva</button>
+          <p class="booking-feedback" id="booking-feedback" aria-live="polite"></p>
+        </form>
+
+        <!-- Columna derecha: Tarjeta de información práctica y horarios -->
+        <aside class="ticket-card fade-up">
+          <span class="ticket-tag">Información de sala</span>
+          <h3>Cómo funciona la reserva</h3>
+          <p>Mantenemos vuestra mesa reservada durante 15 minutos desde la hora elegida.</p>
+
+          <ul class="ticket-list">
+            <li><span>Mar – Jue</span><strong>13:00–16:30 · 20:30–23:00</strong></li>
+            <li><span>Vie – Sáb</span><strong>13:00–17:00 · 20:30–23:30</strong></li>
+            <li><span>Domingos</span><strong>13:00–17:30</strong></li>
+            <li><span>Lunes</span><strong>Cerrado</strong></li>
+          </ul>
+
+          <div class="ticket-footer-note">
+            <strong>Plaza de la Fuente, 8</strong>
+            <span>Tel. 923 555 812 · Grupos de +6 consultar</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rich-footer">
+    <div class="container">
+      <div class="rich-footer-top">
+        <div class="footer-col-brand">
+          <span class="footer-logo">El Fogón de Teresa</span>
+          <p>Cocina casera de temporada, guisos a fuego lento y trato cercano desde 1998.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explorar</h4>
+          <ul>
+            <li><a href="index.html">Portada</a></li>
+            <li><a href="carta.html">La Carta Ilustrada</a></li>
+            <li><a href="bodega-casa.html">La Casa y El Huerto</a></li>
+            <li><a href="reservas.html">Reservar mesa</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Visita y contacto</h4>
+          <ul>
+            <li>Plaza de la Fuente, 8 · Salamanca</li>
+            <li>Tel. 923 555 812</li>
+            <li>Mar – Dom · 13:00 a 23:30</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rich-footer-bottom">
+        <span>© 2026 El Fogón de Teresa · Cocina de mercado</span>
+        <span>Lunes cerrado por descanso del equipo</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

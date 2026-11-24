@@ -1,0 +1,996 @@
+:root {
+  --linen: #E6ECE4;          /* Fondo verde salvia/oliva claro (adiós beige) */
+  --linen-dark: #D6E0D3;     /* Banda / footer / banner en salvia un poco más marcada */
+  --paper: #FFFFFF;          /* Tarjetas limpias y luminosas */
+  --sage: #243B2E;           /* Verde bosque/oliva profundo para títulos y acentos */
+  --sage-light: #355442;
+  --terracotta: #C45C26;     /* Terracota para precios, botones y etiquetas */
+  --terracotta-dark: #A34819;
+  --gold: #8A9A8B;           /* Detalles y líneas en verde grisáceo */
+  --ink: #1D2620;            /* Texto oscuro natural */
+  --muted: #526158;          /* Texto secundario */
+  --line: #C3D0C0;           /* Bordes sutiles */
+}
+
+body.theme-bodega {
+  --linen: #E6ECE4;
+  --linen-dark: #D6E0D3;
+  --paper: #FFFFFF;
+  --sage: #243B2E;
+  --sage-light: #355442;
+  --terracotta: #C45C26;
+  --terracotta-dark: #A34819;
+  --gold: #8A9A8B;
+  --ink: #1D2620;
+  --muted: #526158;
+  --line: #C3D0C0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Manrope", system-ui, sans-serif;
+  background-color: var(--linen);
+  color: var(--ink);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .brand-title, .footer-logo {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.container {
+  width: min(1140px, 90%);
+  margin-inline: auto;
+}
+
+/* Cabecera editorial en dos niveles */
+.editorial-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(230, 236, 228, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+body.theme-bodega .editorial-header {
+  background: rgba(230, 236, 228, 0.96);
+}
+
+.editorial-header.scrolled {
+  box-shadow: 0 8px 25px rgba(29, 38, 32, 0.08);
+}
+
+.header-stack {
+  padding-block: 0.9rem;
+}
+
+.header-top-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.header-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+.brand-title {
+  font-size: clamp(1.55rem, 3vw, 2.05rem);
+  text-decoration: none;
+  color: var(--sage);
+  letter-spacing: 0.01em;
+}
+
+.header-cta-link {
+  justify-self: end;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  text-decoration: none;
+}
+
+.header-cta-link:hover {
+  color: var(--terracotta-dark);
+  text-decoration: underline;
+}
+
+.burger-btn {
+  display: none;
+  justify-self: end;
+  background: var(--terracotta);
+  color: #FFFFFF;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.editorial-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.3rem;
+  padding-top: 0.65rem;
+}
+
+.editorial-nav a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  transition: color 0.2s ease;
+}
+
+.editorial-nav a:hover,
+.editorial-nav a.active {
+  color: var(--terracotta);
+}
+
+.nav-dot {
+  color: var(--gold);
+  font-size: 0.8rem;
+}
+
+/* Botones */
+.btn-terracotta,
+.btn-outline-light,
+.btn-wine {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.9rem 1.7rem;
+  border-radius: 6px;
+  transition: transform 0.22s ease, background-color 0.22s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-terracotta,
+.btn-wine {
+  background-color: var(--terracotta);
+  color: #FFFFFF;
+}
+
+.btn-terracotta:hover,
+.btn-wine:hover {
+  background-color: var(--terracotta-dark);
+  transform: translateY(-2px);
+}
+
+.btn-outline-light {
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-2px);
+}
+
+.full-btn {
+  width: 100%;
+}
+
+/* Hero Banner inmersivo (Inicio) */
+.hero-banner {
+  position: relative;
+  min-height: 76vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #FFFFFF;
+}
+
+.hero-backdrop {
+  position: absolute;
+  inset: -5%;
+  z-index: 0;
+  will-change: transform;
+}
+
+.hero-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(95deg, rgba(24, 38, 30, 0.88) 0%, rgba(24, 38, 30, 0.56) 60%, rgba(24, 38, 30, 0.3) 100%);
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 2.5rem;
+  align-items: end;
+  padding-block: 4.5rem;
+}
+
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #F2A679;
+  margin-bottom: 0.8rem;
+}
+
+.hero-copy h1 {
+  font-size: clamp(2.6rem, 5.5vw, 4.3rem);
+  margin-bottom: 1.1rem;
+}
+
+.hero-copy h1 em {
+  font-style: italic;
+  color: #F2A679;
+}
+
+.lead {
+  font-size: 1.06rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 52ch;
+  margin-bottom: 1.9rem;
+}
+
+.hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.floating-note {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--terracotta);
+  box-shadow: 0 20px 45px rgba(29, 38, 32, 0.2);
+}
+
+.note-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--terracotta);
+  margin-bottom: 0.3rem;
+}
+
+.floating-note strong {
+  display: block;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.45rem;
+  margin-bottom: 0.35rem;
+}
+
+.floating-note p {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+/* Secciones (Inicio) */
+.section {
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+
+.section-sage {
+  background-color: var(--sage);
+  color: #FFFFFF;
+}
+
+.split-showcase {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.arch-image {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  border-radius: 220px 220px 14px 14px;
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 40px rgba(29, 38, 32, 0.12);
+}
+
+.showcase-text h2 {
+  font-size: clamp(2.1rem, 4vw, 3rem);
+  color: var(--sage);
+  margin-bottom: 1rem;
+}
+
+.showcase-text p {
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+
+.signature-line {
+  padding-block: 0.9rem;
+  border-top: 1px solid var(--line);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--sage);
+}
+
+.text-arrow-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  color: var(--terracotta);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.94rem;
+}
+
+.text-arrow-link:hover {
+  transform: translateX(4px);
+}
+
+.section-intro {
+  margin-bottom: 2.5rem;
+}
+
+.section-intro h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: inherit;
+}
+
+.section-sage .kicker {
+  color: #F2A679;
+}
+
+.strip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.strip-item {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  background: var(--sage-light);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  padding: 1rem 1.4rem;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.strip-item:hover {
+  transform: translateX(6px);
+  border-color: #F2A679;
+}
+
+.strip-item img {
+  width: 110px;
+  height: 82px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.strip-cat {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #F2A679;
+  font-weight: 700;
+}
+
+.strip-info h3 {
+  font-size: 1.45rem;
+  margin-block: 0.15rem;
+}
+
+.strip-info p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.strip-price {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.center-row {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+/* Banners de subpáginas */
+.subpage-banner {
+  background: var(--linen-dark);
+  border-bottom: 1px solid var(--line);
+  padding-block: clamp(2.6rem, 5vw, 4rem);
+}
+
+.subpage-banner.wine-banner {
+  background: linear-gradient(135deg, var(--sage) 0%, #17271E 100%);
+  color: #FFFFFF;
+  border-bottom: none;
+}
+
+.subpage-banner.wine-banner .kicker {
+  color: #F2A679;
+}
+
+.subpage-banner.wine-banner h1 {
+  color: #FFFFFF;
+}
+
+.subpage-banner.wine-banner p {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.subpage-banner h1 {
+  font-size: clamp(2.3rem, 4.5vw, 3.3rem);
+  color: var(--sage);
+  margin-bottom: 0.5rem;
+}
+
+.subpage-banner p {
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+/* Pestañas y Carta Ilustrada */
+.tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+}
+
+.tab-btn {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 0.5rem 1.15rem;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+  background: var(--terracotta);
+  color: #FFFFFF;
+  border-color: var(--terracotta);
+}
+
+.menu-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.4rem 1.4rem;
+}
+
+.menu-row {
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: padding-left 0.25s ease, background-color 0.25s ease;
+}
+
+.menu-row:last-child {
+  border-bottom: none;
+}
+
+.menu-row:hover,
+.menu-row.active {
+  padding-left: 0.75rem;
+  background: var(--linen-dark);
+}
+
+.menu-row-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  margin-bottom: 0.35rem;
+}
+
+.menu-row-head h3 {
+  font-size: 1.45rem;
+  color: var(--ink);
+}
+
+.menu-row.active .menu-row-head h3 {
+  color: var(--sage);
+}
+
+.dotted-line {
+  flex: 1;
+  border-bottom: 1px dotted var(--gold);
+}
+
+.row-price {
+  font-weight: 700;
+  color: var(--terracotta);
+  font-size: 0.98rem;
+}
+
+.menu-row p {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.dish-preview-box {
+  position: sticky;
+  top: 130px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(29, 38, 32, 0.08);
+}
+
+.preview-frame {
+  height: 290px;
+  overflow: hidden;
+}
+
+.preview-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.28s ease, transform 0.45s ease;
+}
+
+.preview-frame img.switching {
+  opacity: 0.35;
+  transform: scale(1.04);
+}
+
+.preview-caption {
+  padding: 1.5rem;
+}
+
+.preview-prep {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--terracotta);
+  margin-bottom: 0.4rem;
+}
+
+.preview-caption h3 {
+  font-size: 1.65rem;
+  color: var(--ink);
+  margin-bottom: 0.45rem;
+}
+
+.preview-caption p {
+  font-size: 0.93rem;
+  color: var(--muted);
+}
+
+/* La Casa y El Huerto: Cronología + Productores */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.timeline-step {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--sage);
+  border-radius: 12px;
+  padding: 1.65rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.timeline-step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(29, 38, 32, 0.08);
+}
+
+.step-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--terracotta);
+  margin-bottom: 0.6rem;
+}
+
+.timeline-step h3 {
+  font-size: 1.45rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-step p {
+  font-size: 0.93rem;
+  color: var(--muted);
+}
+
+.producers-band {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.producers-band h3 {
+  font-size: 1.8rem;
+  color: var(--ink);
+  margin-bottom: 1.3rem;
+}
+
+.producers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.producer-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--terracotta);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.producer-card span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--sage);
+}
+
+.producer-card h4 {
+  font-size: 1.35rem;
+  color: var(--ink);
+  margin-block: 0.3rem 0.45rem;
+}
+
+.producer-card p {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* Reservas: Formulario con ambiente + Ticket lateral */
+.reserve-split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.booking-form {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(1.5rem, 4vw, 2.3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  box-shadow: 0 14px 32px rgba(29, 38, 32, 0.06);
+}
+
+.zone-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-top: 0.35rem;
+}
+
+.zone-btn {
+  padding: 0.65rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--linen);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.zone-btn:hover,
+.zone-btn.active {
+  background: var(--sage);
+  color: #FFFFFF;
+  border-color: var(--sage);
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.booking-form label,
+.slot-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.76rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--linen);
+  color: var(--ink);
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.55rem;
+  margin-top: 0.35rem;
+}
+
+.slot-btn {
+  padding: 0.6rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--linen);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.slot-btn:hover,
+.slot-btn.active {
+  background: var(--terracotta);
+  color: #FFFFFF;
+  border-color: var(--terracotta);
+}
+
+.booking-feedback {
+  font-size: 0.92rem;
+  font-weight: 600;
+  min-height: 1.3em;
+}
+
+.ticket-card {
+  background: var(--sage);
+  color: #FFFFFF;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 18px 36px rgba(29, 38, 32, 0.14);
+}
+
+.ticket-tag {
+  display: inline-block;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #F2A679;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.ticket-card h3 {
+  font-size: 1.65rem;
+  margin-bottom: 0.6rem;
+}
+
+.ticket-card > p {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.4rem;
+}
+
+.ticket-list {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.ticket-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding-block: 0.65rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.22);
+  font-size: 0.88rem;
+}
+
+.ticket-footer-note strong {
+  display: block;
+  font-size: 0.96rem;
+  color: #FFFFFF;
+}
+
+.ticket-footer-note span {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* Animación suave */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Footer mejorado en todas las páginas */
+.rich-footer {
+  background: var(--linen-dark);
+  border-top: 1px solid var(--line);
+  padding-top: 3rem;
+  padding-bottom: 1.6rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.rich-footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 2.2rem;
+  padding-bottom: 2.2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.footer-logo {
+  font-size: 1.65rem;
+  color: var(--sage);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-col-brand p {
+  max-width: 36ch;
+  font-size: 0.9rem;
+}
+
+.footer-col h4 {
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.footer-col a {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-col a:hover {
+  color: var(--terracotta);
+}
+
+.rich-footer-bottom {
+  padding-top: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 0.84rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-inner,
+  .split-showcase,
+  .menu-layout,
+  .timeline-grid,
+  .producers-grid,
+  .reserve-split,
+  .rich-footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .dish-preview-box {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 720px) {
+  .header-top-bar {
+    grid-template-columns: 1fr auto;
+  }
+
+  .header-meta,
+  .header-cta-link,
+  .nav-dot {
+    display: none;
+  }
+
+  .burger-btn {
+    display: inline-block;
+  }
+
+  .editorial-nav {
+    display: none;
+    flex-direction: column;
+    padding-top: 1rem;
+    gap: 0.85rem;
+  }
+
+  .editorial-nav.open {
+    display: flex;
+  }
+
+  .strip-item {
+    grid-template-columns: 1fr;
+  }
+
+  .strip-item img {
+    width: 100%;
+    height: 170px;
+  }
+
+  .form-grid-2,
+  .zone-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .slots-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
